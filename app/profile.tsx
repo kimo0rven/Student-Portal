@@ -1,4 +1,6 @@
 import { StyleSheet, Image, Text, View } from 'react-native';
+import { useEffect } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavBar } from '@/components/nav-bar';
 
 const STUDENT = {
@@ -21,6 +23,31 @@ function ProfileRow({ label, value }: { label: string; value: string }) {
     </View>
   );
 }
+
+const STORAGE_KEY = '@student_registration_data';
+useEffect(() => {
+  loadStudentData();
+}, []);
+
+const loadStudentData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
+    if (jsonValue != null) {
+      const data = JSON.parse(jsonValue);
+      setName(data.fullName || '');
+      setStudentID(data.studentID || '');
+      setCourse(data.course || '');
+      setYearLevel(data.year || '');
+      setContact(data.contact || '');
+      Alert.alert('Success', 'Previous data loaded successfully!');
+    }
+  } catch (error) {
+    Alert.alert('Error', 'Failed to load data.');
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
 export default function ProfileScreen() {
   return (
