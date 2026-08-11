@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavBar } from '@/components/nav-bar';
 import { useState } from 'react';

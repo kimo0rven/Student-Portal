@@ -1,5 +1,5 @@
-import { StyleSheet, Image, Text, View } from 'react-native';
-import { useEffect } from 'react'
+import { StyleSheet, Image, Text, View, Alert } from 'react-native';
+import { useEffect, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavBar } from '@/components/nav-bar';
 
@@ -24,43 +24,55 @@ function ProfileRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-const STORAGE_KEY = '@student_registration_data';
-useEffect(() => {
-  loadStudentData();
-}, []);
 
-const loadStudentData = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
-    if (jsonValue != null) {
-      const data = JSON.parse(jsonValue);
-      setName(data.fullName || '');
-      setStudentID(data.studentID || '');
-      setCourse(data.course || '');
-      setYearLevel(data.year || '');
-      setContact(data.contact || '');
-      Alert.alert('Success', 'Previous data loaded successfully!');
-    }
-  } catch (error) {
-    Alert.alert('Error', 'Failed to load data.');
-    console.error(error);
-  } finally {
-    setLoading(false);
-  }
-};
+
 
 export default function ProfileScreen() {
+  const STORAGE_KEY = '@student_registration_data';
+
+  const [fullName, setFullName] = useState('');
+  const [studentID, setStudentID] = useState('');
+  const [course, setCourse] = useState('');
+  const [yearLevel, setYearLevel] = useState('');
+  const [email, setEmail] = useState('');
+  const [contactNumber, setContactNumber] = useState('');
+
+  useEffect(() => {
+    loadStudentData();
+  }, []);
+
+  const loadStudentData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
+      if (jsonValue != null) {
+        const data = JSON.parse(jsonValue);
+        setFullName(data.fullName || '');
+        setStudentID(data.studentID || '');
+        setCourse(data.course || '');
+        setYearLevel(data.yearLevel || '');
+        setEmail(data.email || '');
+        setContactNumber(data.contactNumber || '');
+        Alert.alert('Success', 'Previous data loaded successfully!');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to load data.');
+      console.error(error);
+    }
+  };
+
+
   return (
     <View style={styles.screen}>
       <View style={styles.content}>
         <Image style={styles.avatarImage} resizeMode="cover" source={images.avatar}/>
-        <Text style={styles.name}>{STUDENT.name}</Text>
-        <Text style={styles.subtitle}>{STUDENT.major}</Text>
+        <Text style={styles.name}>{fullName}</Text>
+        <Text style={styles.subtitle}>{course}</Text>
 
         <View style={styles.card}>
-          <ProfileRow label="Student ID" value={STUDENT.id} />
-          <ProfileRow label="Year" value={STUDENT.year} />
-          <ProfileRow label="Email" value={STUDENT.email} />
+          <ProfileRow label="Student ID" value={studentID} />
+          <ProfileRow label="Year" value={yearLevel} />
+          <ProfileRow label="Email" value={email} />
+          <ProfileRow label="Contact Number" value={contactNumber} />
         </View>
       </View>
 
