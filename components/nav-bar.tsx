@@ -3,10 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const TABS = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/profile', label: 'Profile' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/register', label: 'Register' }
+    { href: '/product', label: 'Product' },
+    { href: '/details', label: 'Product Details' },
 ] as const;
 
 export function NavBar() {

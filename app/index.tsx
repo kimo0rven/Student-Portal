@@ -6,9 +6,9 @@ export default function HomeScreen() {
   return (
     <View style={styles.screen}>
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome to the Student Portal</Text>
+        <Text style={styles.title}>Axios activity</Text>
         <Text style={styles.subtitle}>
-          Use the navigation bar below to check your profile, learn about the portal!
+          Use the navigation bar below!
         </Text>
       </View>
       
