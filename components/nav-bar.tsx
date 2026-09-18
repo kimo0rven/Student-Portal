@@ -6,7 +6,8 @@ const TABS = [
     { href: '/about', label: 'About' },
     { href: '/profile', label: 'Profile' },
     { href: '/contact', label: 'Contact' },
-    { href: '/register', label: 'Register' }
+    { href: '/register', label: 'Register' },
+    { href: '/students', label: 'Students' }
 ] as const;
 
 export function NavBar() {

@@ -16,6 +16,7 @@ export default function RootLayout() {
         <Stack.Screen name="contact" options={{ title: 'Contact' }} />
         <Stack.Screen name="profile" options={{ title: 'Profile' }} />
         <Stack.Screen name="register" options={{ title: 'Register'}} />
+        <Stack.Screen name="students" options={{ title: 'Students' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
